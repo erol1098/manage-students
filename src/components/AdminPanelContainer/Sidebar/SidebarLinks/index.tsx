@@ -7,8 +7,8 @@ import { sidebarLinks } from './sidebar-links';
 const SidebarLinks = () => {
   return (
     <ul className={styles.container}>
-      {sidebarLinks.map(({ id, iconURL, name }) => (
-        <SidebarLinkItem key={id} iconURL={iconURL} name={name} />
+      {sidebarLinks.map(({ id, iconURL, name, link }) => (
+        <SidebarLinkItem key={id} iconURL={iconURL} name={name} link={link} />
       ))}
     </ul>
   );

@@ -2,22 +2,20 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import styles from './page.module.css';
+import Students from '@/components/Students';
 
-import Dashboard from '@/components/Dashboard';
-
-const DashboardPage = () => {
+const StudentsPage = () => {
   const cookieStore = cookies();
   const token = cookieStore.get('token');
 
   if (!token) {
     redirect('/login');
   }
-
   return (
     <main className={styles.main}>
-      <Dashboard />
+      <Students />
     </main>
   );
 };
 
-export default DashboardPage;
+export default StudentsPage;

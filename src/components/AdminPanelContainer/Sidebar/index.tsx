@@ -5,7 +5,7 @@ import SidebarAvatar from './SidebarAvatar';
 import SidebarLinks from './SidebarLinks';
 import LogoutButton from './LogoutButton';
 
-const DashboardSidebar = () => {
+const Sidebar = () => {
   return (
     <section className={styles.sidebar}>
       <SidebarHeading />
@@ -16,4 +16,4 @@ const DashboardSidebar = () => {
   );
 };
 
-export default DashboardSidebar;
+export default Sidebar;

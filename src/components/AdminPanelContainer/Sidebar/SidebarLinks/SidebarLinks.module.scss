@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+
+  & > li {
+    list-style: none;
+    padding-left: 2rem;
+    border-radius: 4px;
+
+    & > a {
+      width: 193px;
+      height: 41px;
+      flex-shrink: 0;
+
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+
+      & > img {
+        width: 19px;
+        height: 17px;
+        flex-shrink: 0;
+      }
+
+      & > p {
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+  }
+}
