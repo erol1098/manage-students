@@ -5,6 +5,7 @@ import styles from './Dashboard.module.scss';
 
 import DashboardSidebar from './Sidebar/DashboardSidebar';
 import ViewCardContainer from './ViewCardContainer.tsx';
+import Header from './Header';
 
 const Dashboard = () => {
   const cookieStore = cookies();
@@ -17,7 +18,10 @@ const Dashboard = () => {
   return (
     <section className={styles.container}>
       <DashboardSidebar />
-      <ViewCardContainer />
+      <div>
+        <Header />
+        <ViewCardContainer />
+      </div>
     </section>
   );
 };
