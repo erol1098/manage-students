@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+
 import styles from './Login.module.scss';
 
 import { LoginForm as LF } from './LoginFormClass';
-import { useRouter } from 'next/router';
 
 const LoginForm = () => {
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -25,6 +27,7 @@ const LoginForm = () => {
     setSubmitted(true);
 
     if (submitResult.isValidated) {
+      Cookies.set('token', JSON.stringify(true));
       router.push('/dashboard');
     } else {
       setErrors(submitResult.values);
