@@ -7,7 +7,7 @@ const FormHeading = () => {
         <span></span>
         <h1>Manage Courses</h1>
       </div>
-      <div>
+      <div className={styles.subtitle}>
         <h2>SIGN IN</h2>
         <p>Enter your credentials to access your account</p>
       </div>
