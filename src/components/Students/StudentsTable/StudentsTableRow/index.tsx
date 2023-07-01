@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
-import styles from './StudentsTable.module.scss';
+import styles from '../StudentsTable.module.scss';
+import TableRowButtonsContainer from './TableRowButtonsContainer';
 
 const StudentsTableRow = ({ user }: any) => {
   const userOverview = {
@@ -24,15 +25,7 @@ const StudentsTableRow = ({ user }: any) => {
       <p>{userOverview.phone}</p>
       <p>{userOverview.website}</p>
       <p>{userOverview.companyName}</p>
-      <div>
-        <Image src='/assets/icons/pen.svg' alt='edit' width={18} height={18} />
-        <Image
-          src='/assets/icons/trash.svg'
-          alt='delete'
-          width={16}
-          height={16}
-        />
-      </div>
+      <TableRowButtonsContainer student={user} />
     </li>
   );
 };
