@@ -1,11 +1,25 @@
+.students {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 1rem 2rem;
+  background: #f8f8f8;
+}
+
 .students__header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
-  padding: 0.5rem 2rem;
+  width: 1110px;
+
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e5e5;
 
   & > p {
     color: #000;
@@ -74,4 +88,8 @@
       cursor: pointer;
     }
   }
+}
+
+.students__row {
+  display: grid;
 }

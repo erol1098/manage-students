@@ -1,3 +1,5 @@
+import styles from './Students.module.scss';
+
 import AdminPanelContainer from '../AdminPanelContainer';
 import Header from './Header';
 import StudentsTable from './StudentsTable';
@@ -5,8 +7,10 @@ import StudentsTable from './StudentsTable';
 const Students = () => {
   return (
     <AdminPanelContainer>
-      <Header />
-      <StudentsTable />
+      <div className={styles.students}>
+        <Header />
+        <StudentsTable />
+      </div>
     </AdminPanelContainer>
   );
 };

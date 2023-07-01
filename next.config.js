@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
 
-module.exports = nextConfig
+const nextConfig = {
+  swcMinify: true,
+  images: {
+    domains: ['robohash.org'],
+  },
+};
+
+module.exports = nextConfig;

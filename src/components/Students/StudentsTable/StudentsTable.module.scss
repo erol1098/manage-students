@@ -1,0 +1,66 @@
+.students-table {
+  background: #f8f8f8;
+
+  display: grid;
+  row-gap: 1rem;
+
+  margin: auto;
+}
+
+.students-table__header {
+  width: 1110px;
+  padding: 1.3rem 1rem;
+
+  display: grid;
+  display: grid;
+  grid-template-columns: 100px 150px 200px repeat(4, 1fr);
+  align-items: center;
+
+  color: #acacac;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.students-table__row {
+  width: 1110px;
+  height: 85px;
+  flex-shrink: 0;
+
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.7rem 1rem;
+
+  display: grid;
+  grid-template-columns: 100px 150px 200px repeat(4, 1fr);
+  align-items: center;
+
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  & > img {
+    border-radius: 8px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05),
+      inset 0px 0px 0px 1px rgba(209, 213, 219, 1);
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 33px;
+    padding-right: 1rem;
+
+    & > img {
+      cursor: pointer;
+      &:hover {
+        filter: brightness(1.1);
+        transform: scale(1.1);
+      }
+    }
+  }
+}
