@@ -30,7 +30,7 @@ const Header = () => {
         </div>
       </div>
       {openModal && (
-        <Modal>
+        <Modal setOpenModal={setOpenModal}>
           <StudentForm
             buttonName='Add Student'
             student={{

@@ -9,6 +9,15 @@
   padding: 1rem;
   border-radius: 4px;
 
+  & h3 {
+    color: #feaf00;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: underline;
+  }
+
   & button {
     width: 415px;
     height: 44px;

@@ -105,6 +105,9 @@ const StudentForm = ({
       onSubmit={handleSubmit}
       onChange={handleFormChange}
     >
+      <h3>
+        {student.id ? 'Edit' : 'Add'} Student {student.firstName}{' '}
+      </h3>
       {studentFormItems.map((item) => (
         <StudentFormItem
           key={item.id}
@@ -124,8 +127,8 @@ const StudentForm = ({
           <Image
             src='/assets/icons/spinner-white.svg'
             alt='loading'
-            width={36}
-            height={36}
+            width={30}
+            height={30}
           />
         ) : (
           buttonName
