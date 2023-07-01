@@ -3,8 +3,6 @@ import Image from 'next/image';
 import styles from './StudentsTable.module.scss';
 
 const StudentsTableRow = ({ user }: any) => {
-  console.log('first user', user);
-
   const userOverview = {
     avatar: user.image,
     name: `${user.firstName} ${user.lastName}`,
