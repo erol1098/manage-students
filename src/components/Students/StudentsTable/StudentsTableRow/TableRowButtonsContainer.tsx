@@ -34,7 +34,11 @@ const TableRowButtonsContainer = ({ student }: any) => {
       </div>
       {openModal && (
         <Modal>
-          <StudentForm student={student} buttonName='Update Student' />
+          <StudentForm
+            student={student}
+            buttonName='Update Student'
+            setOpenModal={setOpenModal}
+          />
         </Modal>
       )}
     </>

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import axios from 'axios';
+
 import styles from './StudentForm.module.scss';
 
 import StudentFormItem from './StudentFormItem';
@@ -7,10 +9,12 @@ import StudentFormItem from './StudentFormItem';
 import { studentFormItems } from './student-form-items';
 
 import { StudentForm as SF } from './StudentFormClass';
+import Image from 'next/image';
 
 interface StudentFormProps {
   buttonName: string;
   student: any;
+  setOpenModal: (openModal: boolean) => void;
 }
 
 interface StudentOverview {
@@ -22,8 +26,14 @@ interface StudentOverview {
   companyName: string;
 }
 
-const StudentForm = ({ buttonName, student }: StudentFormProps) => {
+const StudentForm = ({
+  buttonName,
+  student,
+  setOpenModal,
+}: StudentFormProps) => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
@@ -42,7 +52,30 @@ const StudentForm = ({ buttonName, student }: StudentFormProps) => {
     setSubmitted(true);
 
     if (submitResult.isValidated) {
-      console.log('Form submitted');
+      const request = {
+        ...student,
+        ...submitResult.values,
+      };
+
+      if (student.id) {
+        setLoading(true);
+        axios
+          .put(`https://dummyjson.com/users/${student.id}`, request)
+          .then((response) => {
+            console.log('updated user', response);
+            setLoading(false);
+            setOpenModal(false);
+          });
+      } else {
+        setLoading(true);
+        axios
+          .post('https://dummyjson.com/users/add', request)
+          .then((response) => {
+            console.log('new user', response);
+            setLoading(false);
+            setOpenModal(false);
+          });
+      }
     } else {
       setErrors(submitResult.values);
     }
@@ -62,7 +95,7 @@ const StudentForm = ({ buttonName, student }: StudentFormProps) => {
     email: student.email,
     phone: student.phone,
     website: student.domain,
-    companyName: student.company.name,
+    companyName: student.company?.name ? student.company.name : '',
   };
 
   return (
@@ -86,7 +119,18 @@ const StudentForm = ({ buttonName, student }: StudentFormProps) => {
           error={errors[item.name as keyof StudentOverview]}
         />
       ))}
-      <button type='submit'>{buttonName}</button>
+      <button type='submit'>
+        {loading ? (
+          <Image
+            src='/assets/icons/spinner-white.svg'
+            alt='loading'
+            width={36}
+            height={36}
+          />
+        ) : (
+          buttonName
+        )}
+      </button>
     </form>
   );
 };
