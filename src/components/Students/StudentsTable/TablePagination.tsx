@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 import styles from './StudentsTable.module.scss';
 
@@ -18,7 +20,13 @@ const TablePagination = ({
   setSkip,
   total,
 }: TablePaginationProps) => {
+  const searchParams = useSearchParams();
   const router = useRouter();
+
+  useEffect(() => {
+    setSkip(searchParams.get('skip') ? parseInt(searchParams.get('skip')!) : 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total]);
 
   return (
     <div className={styles['students-table__pagination']}>
@@ -51,7 +59,7 @@ const TablePagination = ({
           width={24}
           height={24}
           onClick={() => {
-            if (skip - limit < 0) return;
+            if (skip === 0) return;
 
             skip - limit < 0 ? setSkip(0) : setSkip(skip - limit);
 

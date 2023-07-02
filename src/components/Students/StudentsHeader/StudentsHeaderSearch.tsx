@@ -11,7 +11,7 @@ const StudentsHeaderSearch = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (searchTerm.length >= 3) {
+    if (searchTerm.length >= 2) {
       const timer = setTimeout(() => {
         router.push(`?search=${encodeURIComponent(searchTerm)}`);
       }, 1000);
@@ -31,7 +31,7 @@ const StudentsHeaderSearch = () => {
     const newTerm = event.target.value;
     setSearchTerm(newTerm);
 
-    if (newTerm.length < 3) {
+    if (newTerm.length < 2) {
       router.push('/students');
     }
   };

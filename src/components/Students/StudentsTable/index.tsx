@@ -19,8 +19,6 @@ const StudentsTable = () => {
   const [limit, setLimit] = useState(requestLimit ? parseInt(requestLimit) : 6);
   const [skip, setSkip] = useState(requestSkip ? parseInt(requestSkip) : 0);
 
-  //get search query from url
-
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const url = searchQuery
