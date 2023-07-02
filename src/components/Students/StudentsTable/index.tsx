@@ -10,21 +10,26 @@ import TableList from './TableList';
 import TablePagination from './TablePagination';
 
 const StudentsTable = () => {
-  const [limit, setLimit] = useState(6);
-  const [skip, setSkip] = useState(0);
-
   const searchParams = useSearchParams();
 
-  //get search query from url
   const searchQuery = searchParams.get('search');
+  const requestLimit = searchParams.get('limit');
+  const requestSkip = searchParams.get('skip');
 
-  console.log('first', searchQuery);
+  const [limit, setLimit] = useState(requestLimit ? parseInt(requestLimit) : 6);
+  const [skip, setSkip] = useState(requestSkip ? parseInt(requestSkip) : 0);
+
+  //get search query from url
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const url = searchQuery
-    ? `https://dummyjson.com/users/search?q=${searchQuery}&limit=${limit}&skip=${skip}`
-    : `https://dummyjson.com/users?limit=${limit}&skip=${skip}`;
+    ? `https://dummyjson.com/users/search?q=${searchQuery}&limit=${
+        requestLimit ? requestLimit : 6
+      }&skip=${requestSkip ? requestSkip : 0}`
+    : `https://dummyjson.com/users?limit=${
+        requestLimit ? requestLimit : 6
+      }&skip=${requestSkip ? requestSkip : 0}`;
 
   const { data, isLoading } = useSWR(url, fetcher);
 

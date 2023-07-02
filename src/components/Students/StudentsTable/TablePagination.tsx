@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import styles from './StudentsTable.module.scss';
 
@@ -17,6 +18,8 @@ const TablePagination = ({
   setSkip,
   total,
 }: TablePaginationProps) => {
+  const router = useRouter();
+
   return (
     <div className={styles['students-table__pagination']}>
       <div className={styles['students-table__pagination--limit']}>
@@ -27,6 +30,10 @@ const TablePagination = ({
           value={limit}
           onChange={(e) => {
             setLimit(parseInt(e.target.value));
+
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set('limit', e.target.value);
+            router.push(`?${searchParams.toString()}`);
           }}
         >
           <option value='4'>4</option>
@@ -36,7 +43,7 @@ const TablePagination = ({
       </div>
       <div className={styles['students-table__pagination--buttons']}>
         <p>
-          {skip + 1}-{skip + limit > 100 ? 100 : skip + limit} of {total}
+          {skip + 1}-{skip + limit > total ? total : skip + limit} of {total}
         </p>
         <Image
           src='/assets/icons/arrow-left.svg'
@@ -44,7 +51,16 @@ const TablePagination = ({
           width={24}
           height={24}
           onClick={() => {
+            if (skip - limit < 0) return;
+
             skip - limit < 0 ? setSkip(0) : setSkip(skip - limit);
+
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set(
+              'skip',
+              (skip - limit < 0 ? 0 : skip - limit).toString()
+            );
+            router.push(`?${searchParams.toString()}`);
           }}
         />
         <Image
@@ -53,7 +69,16 @@ const TablePagination = ({
           width={24}
           height={24}
           onClick={() => {
-            skip + limit > 100 ? setSkip(100) : setSkip(skip + limit);
+            if (skip + limit >= total) return;
+
+            skip + limit > total ? setSkip(total) : setSkip(skip + limit);
+
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set(
+              'skip',
+              (skip + limit > total ? total : skip + limit).toString()
+            );
+            router.push(`?${searchParams.toString()}`);
           }}
         />
       </div>
