@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 
-import Image from 'next/image';
-import styles from './Students.module.scss';
-import StudentForm from './StudentForm';
-import Modal from '../Modal';
+import styles from './StudentsHeader.module.scss';
 
-const Header = () => {
+import Modal from '@/components/Modal';
+import StudentForm from '../StudentForm';
+import StudentsHeaderSearch from './StudentsHeaderSearch';
+
+const StudentsHeader = () => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -15,15 +16,7 @@ const Header = () => {
       <div className={styles['students__header']}>
         <p>Students List</p>
         <div>
-          <label>
-            <input type='text' placeholder='Search...' />
-            <Image
-              src='/assets/icons/search.svg'
-              alt='search'
-              width={16}
-              height={16}
-            />
-          </label>
+          <StudentsHeaderSearch />
           <button type='button' onClick={() => setOpenModal(true)}>
             ADD NEW STUDENT
           </button>
@@ -50,4 +43,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default StudentsHeader;
