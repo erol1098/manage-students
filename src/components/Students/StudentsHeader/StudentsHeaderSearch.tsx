@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 
 const StudentsHeaderSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
   const [timerId, setTimerId] = useState<any>(null);
 
   const router = useRouter();
@@ -15,18 +14,9 @@ const StudentsHeaderSearch = () => {
     if (searchTerm.length >= 3) {
       const timer = setTimeout(() => {
         router.push(`?search=${encodeURIComponent(searchTerm)}`);
-
-        fetch(`https://dummyjson.com/users/search?q=${searchTerm}`)
-          .then((response) => response.json())
-          .then((data) => setSearchResults(data))
-          .catch((error) => {
-            console.error('Error fetching search results:', error);
-          });
       }, 1000);
 
       setTimerId(timer);
-    } else {
-      setSearchResults([]);
     }
 
     return () => {
@@ -40,6 +30,10 @@ const StudentsHeaderSearch = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTerm = event.target.value;
     setSearchTerm(newTerm);
+
+    if (newTerm.length < 3) {
+      router.push('/students');
+    }
   };
 
   return (

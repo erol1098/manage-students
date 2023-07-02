@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 
+import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 
 import TableHeader from './TableHeader';
@@ -12,12 +13,20 @@ const StudentsTable = () => {
   const [limit, setLimit] = useState(6);
   const [skip, setSkip] = useState(0);
 
+  const searchParams = useSearchParams();
+
+  //get search query from url
+  const searchQuery = searchParams.get('search');
+
+  console.log('first', searchQuery);
+
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  const { data, isLoading } = useSWR(
-    `https://dummyjson.com/users?limit=${limit}&skip=${skip}`,
-    fetcher
-  );
+  const url = searchQuery
+    ? `https://dummyjson.com/users/search?q=${searchQuery}&limit=${limit}&skip=${skip}`
+    : `https://dummyjson.com/users?limit=${limit}&skip=${skip}`;
+
+  const { data, isLoading } = useSWR(url, fetcher);
 
   return (
     <>
