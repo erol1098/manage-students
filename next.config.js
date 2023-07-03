@@ -3,7 +3,7 @@
 const nextConfig = {
   swcMinify: true,
   images: {
-    domains: ['robohash.org'],
+    domains: ['robohash.org', 'i.pravatar.cc'],
   },
 };
 

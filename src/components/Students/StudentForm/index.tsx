@@ -4,6 +4,10 @@ import axios from 'axios';
 
 import styles from './StudentForm.module.scss';
 
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+
+import { setStudents } from '@/redux/features/studentsSlice';
+
 import StudentFormItem from './StudentFormItem';
 
 import { studentFormItems } from './student-form-items';
@@ -42,6 +46,8 @@ const StudentForm = ({
     website: '',
     companyName: '',
   });
+  const dispatch = useAppDispatch();
+  const students = useAppSelector((state) => state.students.students);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,9 +58,30 @@ const StudentForm = ({
     setSubmitted(true);
 
     if (submitResult.isValidated) {
+      const partFromSubmitResult = {
+        firstName: submitResult.values.firstName,
+        lastName: submitResult.values.lastName,
+        email: submitResult.values.email,
+        phone: submitResult.values.phone,
+        domain: submitResult.values.website,
+        company: {
+          address: student.company?.address,
+          department: student.company?.department,
+          title: student.company?.title,
+          name: submitResult.values.companyName,
+        },
+      };
+
       const request = {
         ...student,
-        ...submitResult.values,
+        ...partFromSubmitResult,
+      };
+
+      const newStudentRequest = {
+        image: `https://i.pravatar.cc/150?img=${Math.floor(
+          Math.random() * 70
+        )}`,
+        ...partFromSubmitResult,
       };
 
       if (student.id) {
@@ -62,16 +89,22 @@ const StudentForm = ({
         axios
           .put(`https://dummyjson.com/users/${student.id}`, request)
           .then((response) => {
-            console.log('updated user', response);
+            const updatedStudents = students.map((student: any) => {
+              if (student.id === response.data.id) {
+                return response.data;
+              }
+              return student;
+            });
+            dispatch(setStudents(updatedStudents));
             setLoading(false);
             setOpenModal(false);
           });
       } else {
         setLoading(true);
         axios
-          .post('https://dummyjson.com/users/add', request)
+          .post('https://dummyjson.com/users/add', newStudentRequest)
           .then((response) => {
-            console.log('new user', response);
+            dispatch(setStudents([response.data, ...students]));
             setLoading(false);
             setOpenModal(false);
           });

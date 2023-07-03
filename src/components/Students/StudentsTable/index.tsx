@@ -40,7 +40,7 @@ const StudentsTable = () => {
   useEffect(
     () => {
       if (data) {
-        dispatch(setStudents(data));
+        dispatch(setStudents(data.users));
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +60,7 @@ const StudentsTable = () => {
             setLimit={setLimit}
             skip={skip}
             setSkip={setSkip}
-            total={data.total}
+            total={data?.total}
           />
         </>
       )}

@@ -9,6 +9,7 @@ const SidebarAvatar = () => {
         alt='Avatar'
         width={120}
         height={120}
+        priority
       />
       <h2>John Doe</h2>
       <p>Admin</p>
