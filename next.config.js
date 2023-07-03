@@ -9,6 +9,11 @@ const nextConfig = {
       'localhost',
       'manage-students.vercel.app',
     ],
+    remotePatterns: [
+      'https://robohash.org',
+      'https://i.pravatar.cc',
+      'https://manage-students.vercel.app',
+    ],
   },
 };
 
