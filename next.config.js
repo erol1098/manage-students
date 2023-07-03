@@ -3,7 +3,12 @@
 const nextConfig = {
   swcMinify: true,
   images: {
-    domains: ['robohash.org', 'i.pravatar.cc'],
+    domains: [
+      'robohash.org',
+      'i.pravatar.cc',
+      'localhost',
+      'manage-students.vercel.app',
+    ],
   },
 };
 
