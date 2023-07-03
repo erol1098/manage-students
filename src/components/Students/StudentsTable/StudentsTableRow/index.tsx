@@ -19,6 +19,8 @@ const StudentsTableRow = ({ user }: any) => {
         alt={userOverview.name}
         width={64}
         height={55}
+        placeholder='blur'
+        blurDataURL='/assets/icons/Spinner.svg'
       />
       <p>{userOverview.name}</p>
       <p>{userOverview.email}</p>

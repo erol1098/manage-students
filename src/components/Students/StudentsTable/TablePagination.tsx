@@ -20,30 +20,50 @@ const TablePagination = ({
   setSkip,
   total,
 }: TablePaginationProps) => {
-  const searchParams = useSearchParams();
+  const params = useSearchParams();
   const router = useRouter();
 
   useEffect(() => {
-    setSkip(searchParams.get('skip') ? parseInt(searchParams.get('skip')!) : 0);
+    setSkip(params.get('skip') ? parseInt(params.get('skip')!) : 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total]);
+
+  const changeLimit = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLimit(parseInt(e.target.value));
+
+    const searchParams = new URLSearchParams(params.toString());
+    searchParams.set('limit', e.target.value);
+    router.push(`?${searchParams.toString()}`);
+  };
+
+  const goPreviousPage = () => {
+    if (skip === 0) return;
+
+    skip - limit < 0 ? setSkip(0) : setSkip(skip - limit);
+
+    const searchParams = new URLSearchParams(params.toString());
+    searchParams.set('skip', (skip - limit < 0 ? 0 : skip - limit).toString());
+    router.push(`?${searchParams.toString()}`);
+  };
+
+  const goNextPage = () => {
+    if (skip + limit >= total) return;
+
+    skip + limit > total ? setSkip(total) : setSkip(skip + limit);
+
+    const searchParams = new URLSearchParams(params.toString());
+    searchParams.set(
+      'skip',
+      (skip + limit > total ? total : skip + limit).toString()
+    );
+    router.push(`?${searchParams.toString()}`);
+  };
 
   return (
     <div className={styles['students-table__pagination']}>
       <div className={styles['students-table__pagination--limit']}>
         <label htmlFor='limit'>Rows per page:</label>
-        <select
-          id='limit'
-          name='limit'
-          value={limit}
-          onChange={(e) => {
-            setLimit(parseInt(e.target.value));
-
-            const searchParams = new URLSearchParams(window.location.search);
-            searchParams.set('limit', e.target.value);
-            router.push(`?${searchParams.toString()}`);
-          }}
-        >
+        <select id='limit' name='limit' value={limit} onChange={changeLimit}>
           <option value='4'>4</option>
           <option value='5'>5</option>
           <option value='6'>6</option>
@@ -58,36 +78,14 @@ const TablePagination = ({
           alt='arrow-left'
           width={24}
           height={24}
-          onClick={() => {
-            if (skip === 0) return;
-
-            skip - limit < 0 ? setSkip(0) : setSkip(skip - limit);
-
-            const searchParams = new URLSearchParams(window.location.search);
-            searchParams.set(
-              'skip',
-              (skip - limit < 0 ? 0 : skip - limit).toString()
-            );
-            router.push(`?${searchParams.toString()}`);
-          }}
+          onClick={goPreviousPage}
         />
         <Image
           src='/assets/icons/arrow-right.svg'
           alt='arrow-right'
           width={24}
           height={24}
-          onClick={() => {
-            if (skip + limit >= total) return;
-
-            skip + limit > total ? setSkip(total) : setSkip(skip + limit);
-
-            const searchParams = new URLSearchParams(window.location.search);
-            searchParams.set(
-              'skip',
-              (skip + limit > total ? total : skip + limit).toString()
-            );
-            router.push(`?${searchParams.toString()}`);
-          }}
+          onClick={goNextPage}
         />
       </div>
     </div>
