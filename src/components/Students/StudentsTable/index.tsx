@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
@@ -8,6 +8,9 @@ import TableHeader from './TableHeader';
 import TableLoader from './TableLoader';
 import TableList from './TableList';
 import TablePagination from './TablePagination';
+
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { setStudents } from '@/redux/features/studentsSlice';
 
 const StudentsTable = () => {
   const searchParams = useSearchParams();
@@ -31,6 +34,19 @@ const StudentsTable = () => {
 
   const { data, isLoading } = useSWR(url, fetcher);
 
+  const dispatch = useAppDispatch();
+  const students = useAppSelector((state) => state.students.students);
+
+  useEffect(
+    () => {
+      if (data) {
+        dispatch(setStudents(data));
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data]
+  );
+
   return (
     <>
       <TableHeader />
@@ -38,7 +54,7 @@ const StudentsTable = () => {
         <TableLoader />
       ) : (
         <>
-          <TableList response={data} />
+          <TableList response={students} />
           <TablePagination
             limit={limit}
             setLimit={setLimit}

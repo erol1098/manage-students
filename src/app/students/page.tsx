@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation';
 import styles from './page.module.css';
 import Students from '@/components/Students';
 
+import { Providers } from '@/redux/provider';
+
 const StudentsPage = () => {
   const cookieStore = cookies();
   const token = cookieStore.get('token');
@@ -13,7 +15,9 @@ const StudentsPage = () => {
   }
   return (
     <main className={styles.main}>
-      <Students />
+      <Providers>
+        <Students />
+      </Providers>
     </main>
   );
 };
