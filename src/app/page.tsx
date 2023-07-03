@@ -7,8 +7,12 @@ export default function Home() {
   const cookieStore = cookies();
   const token = cookieStore.get('token');
 
+  console.log('first token: ', token);
+
   if (!token) {
     redirect('/login');
+  } else {
+    redirect('/dashboard');
   }
 
   return <main className={styles.main}></main>;
