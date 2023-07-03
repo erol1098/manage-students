@@ -1,19 +1,15 @@
-'use client';
-
-// import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 import styles from './page.module.css';
 
 export default function Home() {
-  const isLoggedIn = Cookies.get('token');
-  // const router = useRouter();
+  const cookieStore = cookies();
+  const token = cookieStore.get('token');
 
-  // if (isLoggedIn) {
-  //   router.push('/dashboard');
-  // } else {
-  //   router.push('/login');
-  // }
+  if (!token) {
+    redirect('/login');
+  }
 
   return <main className={styles.main}></main>;
 }
