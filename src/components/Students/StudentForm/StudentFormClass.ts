@@ -29,7 +29,8 @@ export class StudentForm {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-    const phoneRegex = /^[0-9+ ]*$/;
+    // any number of digits, spaces, +, (, ), -
+    const phoneRegex = /^[\d\s+()-]+$/;
 
     const firstNameError = !firstName
       ? 'First name is required'
