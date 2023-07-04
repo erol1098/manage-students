@@ -20,7 +20,9 @@ const StudentsTableRow = ({ user }: any) => {
         width={64}
         height={55}
         placeholder='blur'
-        blurDataURL='/assets/icons/loader.svg'
+        blurDataURL='
+          data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8t57hDAAG2wJ7QoGJxAAAAABJRU5ErkJggg==
+        '
       />
       <p>{userOverview.name}</p>
       <p>{userOverview.email}</p>
