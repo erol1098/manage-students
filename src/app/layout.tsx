@@ -4,8 +4,17 @@ import { Montserrat } from 'next/font/google';
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Manage Students',
+  title: 'Manage Students by Erol Mahmutoglu',
   description: "Admin panel for managing students' data.",
+  keywords: [
+    'admin',
+    'panel',
+    'manage',
+    'students',
+    'data',
+    'student',
+    'management',
+  ],
 };
 
 export default function RootLayout({
