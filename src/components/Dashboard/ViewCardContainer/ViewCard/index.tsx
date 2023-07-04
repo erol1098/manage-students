@@ -9,10 +9,6 @@ interface ViewCardProps {
 }
 
 const ViewCard = ({ icon, title, value, backgroundColor }: ViewCardProps) => {
-  const svg = icon;
-  const blob = new Blob([svg], { type: 'image/svg+xml' });
-  const url = URL.createObjectURL(blob);
-
   return (
     <div
       className={styles.container}
@@ -21,7 +17,7 @@ const ViewCard = ({ icon, title, value, backgroundColor }: ViewCardProps) => {
       }}
     >
       <div>
-        <Image src={url} alt={title} width={40} height={40} />
+        <Image src={icon} alt={title} width={40} height={40} />
 
         <p>{title}</p>
       </div>
