@@ -158,7 +158,7 @@ const StudentForm = ({
       <button type='submit'>
         {loading ? (
           <Image
-            src='/assets/icons/spinner-white.svg'
+            src='/assets/icons/loader-white.svg'
             alt='loading'
             width={30}
             height={30}

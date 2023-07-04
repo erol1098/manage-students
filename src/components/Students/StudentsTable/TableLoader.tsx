@@ -6,7 +6,7 @@ const TableLoader = () => {
   return (
     <div className={styles['students-table__loader']}>
       <Image
-        src='/assets/icons/spinner.svg'
+        src='/assets/icons/loader.svg'
         alt='loader'
         width={50}
         height={50}

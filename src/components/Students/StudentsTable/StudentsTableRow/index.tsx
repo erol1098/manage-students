@@ -20,7 +20,7 @@ const StudentsTableRow = ({ user }: any) => {
         width={64}
         height={55}
         placeholder='blur'
-        blurDataURL='/assets/icons/spinner.svg'
+        blurDataURL='/assets/icons/loader.svg'
       />
       <p>{userOverview.name}</p>
       <p>{userOverview.email}</p>
